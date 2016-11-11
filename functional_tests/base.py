@@ -39,6 +39,15 @@ class FunctionalTest(StaticLiveServerTestCase):
     def get_error_element(self):
         return  self.browser.find_element_by_css_selector('.has-error')
 
+    def assert_logged_in(self, email):
+        self.browser.find_element_by_link_text('Log out')
+        navbar = self.browser.find_element_by_css_selector('.navbar')
+        self.assertIn(email, navbar.text)
+
+    def assert_logged_out(self, email):
+        self.browser.find_element_by_name('email')
+        navbar = self.browser.find_element_by_css_selector('.navbar')
+        self.assertNotIn(email, navbar.text)
 
 
 
